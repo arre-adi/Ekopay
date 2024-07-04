@@ -2,13 +2,12 @@ package com.example.ekopay.bottomnav
 
 
 import GreenCreditApp
-import android.view.SurfaceControl.Transaction
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.example.ekopay.HelloWorld
-import com.example.ekopay.ui.theme.HelloWorld6
+import com.example.ekopay.HistoryScreen
+import com.example.ekopay.ShoppingScreen
 
 @Composable
 fun BottomNavGraph(
@@ -24,11 +23,11 @@ fun BottomNavGraph(
         }
         composable(route = BottomBarScreen.History.route)
         {
-            HelloWorld()
+            HistoryScreen()
         }
         composable(route = BottomBarScreen.Shopping.route)
         {
-           HelloWorld6()
+           ShoppingScreen()
         }
     }
 }

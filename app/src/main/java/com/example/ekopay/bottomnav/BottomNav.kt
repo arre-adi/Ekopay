@@ -7,14 +7,12 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -29,6 +27,8 @@ import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.example.ekopay.ui.theme.Black1
+import com.example.ekopay.ui.theme.Green1
 
 
 @Composable
@@ -61,7 +61,7 @@ fun BottomBar(navController: NavHostController) {
 
     Row(
         modifier = Modifier
-            .padding(start = 10.dp, end = 10.dp, top = 8.dp, bottom = 8.dp)
+            .padding(start = 10.dp, end = 10.dp, top = 8.dp, bottom = 1.dp)
             .background(Color.Transparent)
             .fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceEvenly,
@@ -87,7 +87,7 @@ fun AddItem(
 
     Box(
         modifier = Modifier
-            .height(50.dp)
+            .height(60.dp)
             .clickable(onClick = {
                 navController.navigate(screen.route) {
                     popUpTo(navController.graph.findStartDestination().id) {
@@ -98,20 +98,12 @@ fun AddItem(
                 }
             })
     ) {
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center,
-            modifier = Modifier
-                .fillMaxHeight()
-        ) {
-            Icon(
-                painter = painterResource(id = if (selected) screen.icon_focused else screen.icon),
-                contentDescription = screen.title,
-            )
+                    Icon(
+                painter = painterResource(id = screen.icon),
+                tint = if (selected)Green1 else Black1,
+                contentDescription = null
+                )
 
-            Text(text = screen.title,
-                color = Color.Black)
-        }
     }
 }
 

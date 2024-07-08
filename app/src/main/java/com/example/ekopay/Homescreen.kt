@@ -32,6 +32,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.painter.Painter
@@ -43,11 +44,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.ekopay.R
 import com.example.ekopay.ui.theme.Black1
 import com.example.ekopay.ui.theme.Green1
+import com.example.ekopay.ui.theme.White1
 
 @Composable @Preview(showSystemUi = true, showBackground = true)
 fun GreenCreditApp() {
@@ -55,7 +58,7 @@ fun GreenCreditApp() {
         modifier = Modifier
             .fillMaxWidth()
             .wrapContentHeight()
-            .background(Color.White)
+            .background(White1)
             .padding(12.dp)
 
     ) {
@@ -80,8 +83,10 @@ fun WelcomeBar() {
             contentScale = ContentScale.FillHeight,
             modifier = Modifier
                 .matchParentSize()
-                .background(Green1,
-                        shape = RoundedCornerShape(topStart = 12.dp, topEnd = 12.dp))
+                .background(
+                    Green1,
+                    shape = RoundedCornerShape(topStart = 12.dp, topEnd = 12.dp)
+                )
         )
 
         Column(
@@ -99,18 +104,19 @@ fun WelcomeBar() {
 
                 Icon(
                     ImageVector.vectorResource(id = R.drawable.baseline_account_circle_24),
-                    modifier = Modifier.size(50.dp)
+                    modifier = Modifier
+                        .size(50.dp)
                         .padding(end = 10.dp), contentDescription = "User"
                 )
                 Column {
                     Text(
                         "hello anon,",
                         style = MaterialTheme.typography.titleLarge,
-                        color = Color.White
+                        color = White1
                     )
                     Text(
                         "Welcome Back!",
-                        color = Color.White,
+                        color = White1,
                         style = MaterialTheme.typography.titleLarge,
                         fontWeight = FontWeight.Bold
                     )
@@ -135,7 +141,7 @@ fun WelcomeBar() {
         Text("BALANCE",
             style = MaterialTheme.typography.bodyLarge,
             fontWeight = FontWeight(400),
-            color = Color.White)
+            color = White1)
         Text("400 GC",
             style = MaterialTheme.typography.headlineSmall,
             fontWeight = FontWeight(600),
@@ -154,7 +160,7 @@ fun QuickActions() {
         horizontalArrangement = Arrangement.SpaceAround
     ) {
         QuickActionItem(icon = ImageVector.vectorResource(id = R.drawable.scanner), text = "Scan QR")
-        QuickActionItem(icon = ImageVector.vectorResource(id = R.drawable.arrow_down), text = "Pay\r\nContacts")
+        QuickActionItem(icon = ImageVector.vectorResource(id = R.drawable.arrow_down), text = "Pay\r\nContacts", iconSize = 60.dp)
         QuickActionItem(icon = ImageVector.vectorResource(id = R.drawable.empty_wallet), text = "Check\r\nBalance")
         QuickActionItem(icon = ImageVector.vectorResource(id = R.drawable.bag_2), text = "Shopping")
     }
@@ -163,7 +169,7 @@ fun QuickActions() {
 @Composable
 fun EarnCreditsSection() {
     Column(modifier = Modifier
-        .padding(top =16.dp)){
+        .padding(top = 16.dp)) {
         Text("Earn Credits",
             style = MaterialTheme.typography.bodyLarge,
             fontWeight = FontWeight(600),
@@ -176,13 +182,18 @@ fun EarnCreditsSection() {
                 .padding(top = 16.dp),
             horizontalArrangement = Arrangement.SpaceAround
         ) {
-            EarnCreditItem(icon = Icons.Default.Home, text = "Deposit\r\nPET")
-            EarnCreditItem(icon = Icons.Default.Home, text = "Register\r\nEnergy Meter")
-            EarnCreditItem(icon = Icons.Default.Home, text = "Metro\r\nRecharge")
-            EarnCreditItem(icon = Icons.Default.Home, text = "Crowd\r\nFunding")
+            EarnCreditItem(
+                icon = ImageVector.vectorResource(id = R.drawable.noun_water_bottle_2583203),
+                text = "Deposit\r\nEco Brick",
+                iconSize = 40.dp
+            )
+            EarnCreditItem(icon = ImageVector.vectorResource(id = R.drawable.energy_meter), text = "Register\r\nEnergy Meter")
+            EarnCreditItem(icon = ImageVector.vectorResource(id = R.drawable.noun_metro_3866657), text = "Metro\r\nRecharge")
+            EarnCreditItem(icon = ImageVector.vectorResource(id = R.drawable.noun_crowdfunding_850697), text = "Crowd\r\nFunding")
         }
     }
 }
+
 
 @Composable
 fun WhatIsGreenCreditCard() {
@@ -222,8 +233,9 @@ fun GreenCreditInfoCard(question: String) {
             ) {
                 Icon(
                     ImageVector.vectorResource(id = R.drawable.baseline_question_mark_24),
-                    tint = Color.White,
-                    modifier = Modifier.size(45.dp)
+                    tint = White1,
+                    modifier = Modifier
+                        .size(45.dp)
                         .background(color = Green1, shape = CircleShape)
                         .padding(10.dp),
                     contentDescription = "Question Mark"
@@ -236,12 +248,12 @@ fun GreenCreditInfoCard(question: String) {
                     question,
                     style = MaterialTheme.typography.bodyLarge,
                     fontWeight = FontWeight(600),
-                    color = Color.White
+                    color = White1
                 )
                     Text(
                         "Know more",
                         textDecoration = androidx.compose.ui.text.style.TextDecoration.Underline,
-                        color = Color.White
+                        color = White1
                     )
                 }
             }
@@ -275,7 +287,7 @@ fun ShopGreenSection() {
 }
 
 @Composable
-fun QuickActionItem(icon: ImageVector, text: String) {
+fun QuickActionItem(icon: ImageVector, text: String, iconSize: Dp = 35.dp) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
@@ -286,11 +298,10 @@ fun QuickActionItem(icon: ImageVector, text: String) {
                 .background(Black1, shape = RoundedCornerShape(12.dp)),
             contentAlignment = Alignment.Center
         ) {
-            Icon(
-                imageVector = icon,
+            Icon( imageVector = icon,
                 contentDescription = text,
-                tint = Green1,
-                modifier = Modifier.size(35.dp)
+                tint = White1,
+                modifier = Modifier.size(iconSize)
             )
         }
         Spacer(modifier = Modifier.height(4.dp))
@@ -304,7 +315,7 @@ fun QuickActionItem(icon: ImageVector, text: String) {
 }
 
 @Composable
-fun EarnCreditItem(icon: ImageVector, text: String) {
+fun EarnCreditItem(icon: ImageVector, text: String, iconSize: Dp = 45.dp) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
@@ -318,7 +329,8 @@ fun EarnCreditItem(icon: ImageVector, text: String) {
             Icon(
                 imageVector = icon,
                 contentDescription = text,
-                tint = Color.Black
+                tint = White1,
+                modifier = Modifier.size(iconSize)  // Use the iconSize parameter
             )
         }
         Spacer(modifier = Modifier.height(4.dp))

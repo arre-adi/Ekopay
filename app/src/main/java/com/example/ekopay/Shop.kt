@@ -84,7 +84,7 @@ fun ProductCard(product: Product) {
     Card(
         modifier = Modifier
             .padding(8.dp)
-            .shadow(10.dp, RoundedCornerShape(8.dp))
+            .shadow(2.dp, RoundedCornerShape(8.dp))
             .fillMaxWidth(),
         shape = RoundedCornerShape(8.dp)
     ) {

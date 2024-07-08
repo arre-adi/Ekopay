@@ -148,7 +148,7 @@ fun SearchBar(
                 .padding(horizontal = 8.dp),
             colors = TextFieldDefaults.colors(
                 disabledContainerColor = Color.Transparent,
-                focusedContainerColor = Color.White,
+                focusedContainerColor = Color.Transparent,
                 unfocusedContainerColor = Color.Transparent,
                 focusedIndicatorColor = Color.Transparent,
                 unfocusedIndicatorColor = Color.Transparent

@@ -62,7 +62,12 @@ fun GreenCreditApp() {
             .padding(12.dp)
 
     ) {
-        item{WelcomeBar()}
+        item{WelcomeBar(
+            userName = "John",
+            userGreeting = "hello John,",
+            balanceText = "YOUR BALANCE",
+            balanceAmount = "500 GC"
+        )}
         item{QuickActions()}
         item{EarnCreditsSection()}
         item{WhatIsGreenCreditCard()}
@@ -71,7 +76,12 @@ fun GreenCreditApp() {
 }
 
 @Composable
-fun WelcomeBar() {
+fun WelcomeBar(
+    userName: String ,
+    userGreeting: String ,
+    balanceText: String ,
+    balanceAmount: String
+) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -106,17 +116,18 @@ fun WelcomeBar() {
                     ImageVector.vectorResource(id = R.drawable.baseline_account_circle_24),
                     modifier = Modifier
                         .size(50.dp)
-                        .padding(end = 10.dp), contentDescription = "User"
+                        .padding(end = 10.dp),
+                    contentDescription = "User"
                 )
                 Column {
                     Text(
-                        "hello anon,",
+                        userGreeting,
                         style = MaterialTheme.typography.titleLarge,
-                        color = White1
+                        color = Color.White
                     )
                     Text(
-                        "Welcome Back!",
-                        color = White1,
+                        userName,
+                        color = Color.White,
                         style = MaterialTheme.typography.titleLarge,
                         fontWeight = FontWeight.Bold
                     )
@@ -132,20 +143,24 @@ fun WelcomeBar() {
             .fillMaxWidth()
             .height(80.dp)
             .background(
-                Black1,
+                Color.Black,
                 shape = RoundedCornerShape(bottomStart = 12.dp, bottomEnd = 12.dp)
             )
             .padding(16.dp)
 
     ) {
-        Text("BALANCE",
+        Text(
+            balanceText,
             style = MaterialTheme.typography.bodyLarge,
             fontWeight = FontWeight(400),
-            color = White1)
-        Text("400 GC",
+            color = Color.White
+        )
+        Text(
+            balanceAmount,
             style = MaterialTheme.typography.headlineSmall,
             fontWeight = FontWeight(600),
-            color = Green1)
+            color = Green1
+        )
     }
 }
 

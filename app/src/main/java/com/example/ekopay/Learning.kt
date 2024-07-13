@@ -32,16 +32,10 @@ import androidx.compose.ui.unit.sp
 import com.example.ekopay.ui.theme.Black1
 import com.example.ekopay.ui.theme.Green1
 import com.example.ekopay.ui.theme.White1
-import com.google.ai.client.generativeai.BuildConfig
-import com.google.ai.client.generativeai.GenerativeModel
-import com.google.ai.client.generativeai.type.BlockThreshold
-import com.google.ai.client.generativeai.type.HarmCategory
-import com.google.ai.client.generativeai.type.SafetySetting
-import com.google.ai.client.generativeai.type.generationConfig
 
 
 @Composable @Preview(showBackground = true, showSystemUi = true)
-fun Learning() {
+fun LearningScreen() {
 
         Column(
             modifier = Modifier
@@ -57,7 +51,6 @@ fun Learning() {
                 placeholder = "ask questions",
                 initialQuery = "",
                 onQueryChange = { newQuery ->
-                    // Handle the search query change
                     println("ask question: $newQuery")
                 }
             )

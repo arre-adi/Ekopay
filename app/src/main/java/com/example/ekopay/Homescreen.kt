@@ -1,5 +1,6 @@
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -18,11 +19,6 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Person
-import androidx.compose.material.icons.filled.ShoppingCart
-import androidx.compose.material3.AlertDialogDefaults.shape
 import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -30,11 +26,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
@@ -43,17 +36,18 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.ekopay.R
 import com.example.ekopay.ui.theme.Black1
 import com.example.ekopay.ui.theme.Green1
+import com.example.ekopay.ui.theme.Screens
 import com.example.ekopay.ui.theme.White1
 
-@Composable @Preview(showSystemUi = true, showBackground = true)
-fun GreenCreditApp() {
+@Composable
+fun GreenCreditApp(navController: NavController) {
     LazyColumn(
         modifier = Modifier
             .fillMaxWidth()
@@ -68,9 +62,9 @@ fun GreenCreditApp() {
             balanceText = "YOUR BALANCE",
             balanceAmount = "500 GC"
         )}
-        item{QuickActions()}
-        item{EarnCreditsSection()}
-        item{WhatIsGreenCreditCard()}
+        item{QuickActions(navController)}
+        item{EarnCreditsSection(navController)}
+        item{WhatIsGreenCreditCard(navController)}
         item{ShopGreenSection()}
     }
 }
@@ -165,64 +159,179 @@ fun WelcomeBar(
 }
 
 
-
 @Composable
-fun QuickActions() {
+fun QuickActions(navController: NavController) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
             .padding(top = 16.dp),
         horizontalArrangement = Arrangement.SpaceAround
     ) {
-        QuickActionItem(icon = ImageVector.vectorResource(id = R.drawable.scanner), text = "Scan QR")
-        QuickActionItem(icon = ImageVector.vectorResource(id = R.drawable.arrow_down), text = "Pay\r\nContacts", iconSize = 60.dp)
-        QuickActionItem(icon = ImageVector.vectorResource(id = R.drawable.empty_wallet), text = "Check\r\nBalance")
-        QuickActionItem(icon = ImageVector.vectorResource(id = R.drawable.bag_2), text = "Shopping")
+        QuickActionItem(
+            icon = ImageVector.vectorResource(id = R.drawable.scanner),
+            text = "Scan QR",
+            onClick = {  }
+        )
+        QuickActionItem(
+            icon = ImageVector.vectorResource(id = R.drawable.arrow_down),
+            text = "Pay\r\nContacts",
+            iconSize = 60.dp,
+            onClick = {}
+        )
+        QuickActionItem(
+            icon = ImageVector.vectorResource(id = R.drawable.empty_wallet),
+            text = "Check\r\nBalance",
+            onClick = {  }
+        )
+        QuickActionItem(
+            icon = ImageVector.vectorResource(id = R.drawable.bag_2),
+            text = "Shopping",
+            onClick = {  }
+        )
     }
 }
 
 @Composable
-fun EarnCreditsSection() {
-    Column(modifier = Modifier
-        .padding(top = 16.dp)) {
-        Text("Earn Credits",
+fun EarnCreditsSection(navController: NavController) {
+    Column(modifier = Modifier.padding(top = 16.dp)) {
+        Text(
+            "Earn Credits",
             style = MaterialTheme.typography.bodyLarge,
             fontWeight = FontWeight(600),
-            color = Green1,
-            modifier = Modifier
-                .padding(start = 16.dp))
+            color = Green1
+        )
         Row(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(top = 16.dp),
-            horizontalArrangement = Arrangement.SpaceAround
+            horizontalArrangement = Arrangement.SpaceEvenly
         ) {
             EarnCreditItem(
                 icon = ImageVector.vectorResource(id = R.drawable.noun_water_bottle_2583203),
-                text = "Deposit\r\nEco Brick",
-                iconSize = 40.dp
+                text = "Deposit\nEco Brick",
+                iconSize = 40.dp,
+                onClick = { navController.navigate(Screens.submitEcoBrick.route)}
             )
-            EarnCreditItem(icon = ImageVector.vectorResource(id = R.drawable.energy_meter), text = "Register\r\nEnergy Meter")
-            EarnCreditItem(icon = ImageVector.vectorResource(id = R.drawable.noun_metro_3866657), text = "Metro\r\nRecharge")
-            EarnCreditItem(icon = ImageVector.vectorResource(id = R.drawable.noun_crowdfunding_850697), text = "Crowd\r\nFunding")
+            EarnCreditItem(
+                icon = ImageVector.vectorResource(id = R.drawable.energy_meter),
+                text = "Register\nEnergy Meter",
+                onClick = { /*TODO*/}
+            )
+            EarnCreditItem(
+                icon = ImageVector.vectorResource(id = R.drawable.noun_metro_3866657),
+                text = "Metro\nRecharge",
+                onClick = { /*TODO*/}
+            )
+            EarnCreditItem(
+                icon = ImageVector.vectorResource(id = R.drawable.noun_crowdfunding_850697),
+                text = "Crowd\nFunding",
+                onClick = { /*TODO*/}
+            )
         }
     }
 }
 
 
 @Composable
-fun WhatIsGreenCreditCard() {
+fun WhatIsGreenCreditCard(navController: NavController) {
 
     LazyRow(modifier = Modifier.fillMaxWidth()) {
         items(listOf("What is green credit?", "How to earn green credit?")) { question ->
-            GreenCreditInfoCard(question = question)
+            GreenCreditInfoCard(question = question, navController = navController)
         }}
 }
 
 @Composable
-fun GreenCreditInfoCard(question: String) {
+fun ShopGreenSection() {
+    Column(modifier = Modifier
+        .padding(start = 16.dp, bottom = 16.dp)) {
+        Text("Shop Green",
+            style = MaterialTheme.typography.bodyLarge,
+            color = Green1,
+            fontWeight = FontWeight(600),
+            modifier = Modifier
+                .padding(top =0.dp, bottom = 16.dp))
+
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            ShopItem(image = painterResource(id = R.drawable.imgapple), name = "Organic Soap", price = "$5")
+            ShopItem(image = painterResource(id = R.drawable.imgapple), name = "Candles", price = "$10")
+            ShopItem(image = painterResource(id = R.drawable.imgapple), name = "Organic Apples", price = "$20")
+        }
+    }
+}
+
+
+
+
+//-------------------------COMPOSABLE FUNCTIONS---------------------------------------//
+@Composable
+fun QuickActionItem(icon: ImageVector, text: String, iconSize: Dp = 35.dp, onClick: () -> Unit) {
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center,
+        modifier = Modifier.clickable(onClick = onClick)
+    ) {
+        Box(
+            modifier = Modifier
+                .size(62.dp)
+                .background(Black1, shape = RoundedCornerShape(12.dp)),
+            contentAlignment = Alignment.Center
+        ) {
+            Icon(
+                imageVector = icon,
+                contentDescription = text,
+                tint = White1,
+                modifier = Modifier.size(iconSize)
+            )
+        }
+        Spacer(modifier = Modifier.height(4.dp))
+        Text(
+            text = text,
+            fontSize = 12.sp,
+            lineHeight = 14.sp,
+            textAlign = TextAlign.Center
+        )
+    }
+}
+
+@Composable
+fun EarnCreditItem(icon: ImageVector, text: String, iconSize: Dp = 45.dp, onClick: () -> Unit) {
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center,
+    ) {
+        Box(
+            modifier = Modifier
+                .size(62.dp)
+                .clickable(onClick = onClick)
+                .background(Green1, shape = RoundedCornerShape(12.dp)),
+            contentAlignment = Alignment.Center
+        ) {
+            Icon(
+                imageVector = icon,
+                contentDescription = text,
+                tint = White1,
+                modifier = Modifier.size(iconSize)
+            )
+        }
+        Spacer(modifier = Modifier.height(4.dp))
+        Text(
+            text = text,
+            fontSize = 12.sp,
+            lineHeight = 14.sp,
+            textAlign = TextAlign.Center
+        )
+    }
+}
+
+@Composable
+fun GreenCreditInfoCard(question: String, navController: NavController) {
     Card(
         modifier = Modifier
+            .clickable(onClick = {navController.navigate(Screens.learning.route)})
             .wrapContentWidth()
             .height(120.dp)
             .padding(start = 16.dp, top = 16.dp, bottom = 16.dp)
@@ -276,88 +385,6 @@ fun GreenCreditInfoCard(question: String) {
     }
 }
 
-
-
-
-@Composable
-fun ShopGreenSection() {
-    Column(modifier = Modifier
-        .padding(start = 16.dp, bottom = 16.dp)) {
-        Text("Shop Green",
-            style = MaterialTheme.typography.bodyLarge,
-            color = Green1,
-            fontWeight = FontWeight(600),
-            modifier = Modifier
-                .padding(top =0.dp, bottom = 16.dp))
-
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween
-        ) {
-            ShopItem(image = painterResource(id = R.drawable.imgapple), name = "Organic Soap", price = "$5")
-            ShopItem(image = painterResource(id = R.drawable.imgapple), name = "Candles", price = "$10")
-            ShopItem(image = painterResource(id = R.drawable.imgapple), name = "Organic Apples", price = "$20")
-            }
-    }
-}
-
-@Composable
-fun QuickActionItem(icon: ImageVector, text: String, iconSize: Dp = 35.dp) {
-    Column(
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
-    ) {
-        Box(
-            modifier = Modifier
-                .size(62.dp)
-                .background(Black1, shape = RoundedCornerShape(12.dp)),
-            contentAlignment = Alignment.Center
-        ) {
-            Icon( imageVector = icon,
-                contentDescription = text,
-                tint = White1,
-                modifier = Modifier.size(iconSize)
-            )
-        }
-        Spacer(modifier = Modifier.height(4.dp))
-        Text(
-            text = text,
-            fontSize = 12.sp,
-            lineHeight = 14.sp,
-            textAlign = TextAlign.Center
-        )
-    }
-}
-
-@Composable
-fun EarnCreditItem(icon: ImageVector, text: String, iconSize: Dp = 45.dp) {
-    Column(
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
-    ) {
-        Box(
-            modifier = Modifier
-                .size(62.dp)
-                .background(Green1, shape = RoundedCornerShape(12.dp)),
-            contentAlignment = Alignment.Center
-        ) {
-            Icon(
-                imageVector = icon,
-                contentDescription = text,
-                tint = White1,
-                modifier = Modifier.size(iconSize)  // Use the iconSize parameter
-            )
-        }
-        Spacer(modifier = Modifier.height(4.dp))
-        Text(
-            text = text,
-            fontSize = 12.sp,
-            lineHeight = 14.sp,
-            textAlign = TextAlign.Center
-        )
-    }
-}
-
 @Composable
 fun ShopItem(image: Painter, name: String, price: String) {
     Column(
@@ -386,3 +413,4 @@ fun ShopItem(image: Painter, name: String, price: String) {
         )
     }
 }
+

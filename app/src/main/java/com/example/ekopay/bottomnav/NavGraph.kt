@@ -6,8 +6,12 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.example.ekopay.BottomBarScreen
+import com.example.ekopay.EcoBrickScreen
 import com.example.ekopay.HistoryScreen
+import com.example.ekopay.LearningScreen
 import com.example.ekopay.ShoppingScreen
+import com.example.ekopay.ui.theme.Screens
 
 @Composable
 fun BottomNavGraph(
@@ -19,7 +23,7 @@ fun BottomNavGraph(
     ) {
         composable(route = BottomBarScreen.Home.route)
         {
-            GreenCreditApp()
+            GreenCreditApp(navController)
         }
         composable(route = BottomBarScreen.History.route)
         {
@@ -28,6 +32,12 @@ fun BottomNavGraph(
         composable(route = BottomBarScreen.Shopping.route)
         {
            ShoppingScreen()
+        }
+        composable(route = Screens.submitEcoBrick.route){
+            EcoBrickScreen()
+        }
+        composable(route = Screens.learning.route){
+            LearningScreen()
         }
     }
 }

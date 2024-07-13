@@ -1,15 +1,14 @@
-package com.example.ekopay.bottomnav
+package com.example.ekopay
 
-import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.res.vectorResource
-import com.example.ekopay.R
+sealed class Screens(route:String) {
+    object submitEcoBrick : Screens("submit_eco_brick")
+    object learning : Screens("learn_more")
+}
 
 sealed class BottomBarScreen(
     val route: String,
     val icon: Int,
 ) {
-
-    // for home
     object Home: BottomBarScreen(
         route = "home",
         icon =  R.drawable.home,

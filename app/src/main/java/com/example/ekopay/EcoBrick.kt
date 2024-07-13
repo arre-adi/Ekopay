@@ -26,7 +26,7 @@ import androidx.compose.ui.unit.sp
 
 @Composable
 @Preview(showBackground = true, showSystemUi = true)
-fun EcoBrickHomePage() {
+fun EcoBrickScreen() {
     Column(modifier = Modifier
         .fillMaxWidth()
         .padding(12.dp)) {

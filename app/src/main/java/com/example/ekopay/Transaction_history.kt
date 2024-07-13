@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
@@ -16,6 +17,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.*
@@ -26,6 +28,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -112,25 +115,17 @@ fun SearchBar(
 ) {
     var searchQuery by remember { mutableStateOf(TextFieldValue(initialQuery)) }
 
-    Row(
-        modifier = Modifier
-            .padding(16.dp)
-            .clip(RoundedCornerShape(12.dp))
-            .background(Color(0xFFF1F1F1))
-            .fillMaxWidth()
-            .height(56.dp),
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        Icon(
-            imageVector = Icons.Default.Search,
-            contentDescription = "Search Icon",
-            tint = Color.Gray,
-            modifier = Modifier
-                .padding(start = 16.dp)
-                .size(24.dp)
-        )
+
 
         TextField(
+            leadingIcon = {
+                IconButton(onClick = {/*TODO*/}){
+                    Icon(
+                        imageVector = Icons.Default.Search,
+                        contentDescription = "Search"
+                    )
+                }
+            },
             value = searchQuery,
             onValueChange = { newQuery ->
                 searchQuery = newQuery
@@ -143,9 +138,14 @@ fun SearchBar(
                     fontSize = 16.sp
                 )
             },
+            keyboardOptions = KeyboardOptions(
+                imeAction = ImeAction.Search
+            ),
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 8.dp),
+                .padding(16.dp)
+                .clip(RoundedCornerShape(12.dp))
+                .background(Color(0xFFF1F1F1)),
             colors = TextFieldDefaults.colors(
                 disabledContainerColor = Color.Transparent,
                 focusedContainerColor = Color.Transparent,
@@ -155,7 +155,7 @@ fun SearchBar(
             )
         )
     }
-}
+
 
 @Composable
 fun TransactionTabs() {

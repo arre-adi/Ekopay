@@ -39,25 +39,12 @@ fun ShoppingScreen() {
             placeholder = "Search items",
             initialQuery = "",
             onQueryChange = { newQuery ->
-                // Handle the search query change
                 println("Search query: $newQuery")
             }
         )
         ProductGrid()
     }
 }
-
-
-@Composable
-fun TopBar() {
-    Text(
-        text = "SHOPPING",
-        modifier = Modifier.padding(16.dp),
-        fontSize = 24.sp,
-        fontWeight = FontWeight.Bold
-    )
-}
-
 
 @Composable
 fun ProductGrid() {

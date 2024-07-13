@@ -12,32 +12,10 @@ import com.google.ai.client.generativeai.GenerativeModel
 import com.google.ai.client.generativeai.type.GenerateContentResponse
 import kotlinx.coroutines.launch
 
-class GeminiViewModel : ViewModel() {
-    private val generativeModel = GenerativeModel(
-        modelName = "gemini-1.5-flash-001",
-    )
 
-    var searchQuery by mutableStateOf("")
-    var answer by mutableStateOf("")
-    var isLoading by mutableStateOf(false)
-
-    fun search() {
-        viewModelScope.launch {
-            isLoading = true
-            try {
-                val response: GenerateContentResponse = generativeModel.generateContent(searchQuery)
-                answer = response.text ?: "No answer found"
-            } catch (e: Exception) {
-                answer = "Error: ${e.message}"
-            } finally {
-                isLoading = false
-            }
-        }
-    }
-}
 
 @Composable
-fun GeminiSearchBar(viewModel: GeminiViewModel = androidx.lifecycle.viewmodel.compose.viewModel()) {
+fun gemmm(viewModel: GeminiViewModel = androidx.lifecycle.viewmodel.compose.viewModel()) {
     Column(modifier = Modifier.padding(16.dp)) {
         OutlinedTextField(
             value = viewModel.searchQuery,
@@ -64,5 +42,5 @@ fun GeminiSearchBar(viewModel: GeminiViewModel = androidx.lifecycle.viewmodel.co
 // In your main composable function:
 @Composable @Preview(showBackground = true, showSystemUi = true)
 fun lullaScreen() {
-    GeminiSearchBar()
+    gemmm()
 }

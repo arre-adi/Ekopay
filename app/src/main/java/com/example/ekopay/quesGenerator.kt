@@ -15,7 +15,6 @@ import kotlinx.coroutines.launch
 class GeminiViewModel : ViewModel() {
     private val generativeModel = GenerativeModel(
         modelName = "gemini-1.5-flash-001",
-        apiKey = "AIzaSyAXtm7Iau95V7mNeOKLG7yvMLo-Da5gsLo"
     )
 
     var searchQuery by mutableStateOf("")

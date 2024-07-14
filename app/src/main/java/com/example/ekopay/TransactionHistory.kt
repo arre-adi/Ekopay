@@ -35,8 +35,12 @@ import androidx.compose.ui.unit.sp
 import com.example.ekopay.ui.theme.Black1
 import com.example.ekopay.ui.theme.Green1
 
-@Composable @Preview(showBackground = true, showSystemUi = true)
+@Composable
+@Preview(showBackground = true, showSystemUi = true)
 fun TransactionHistoryScreen() {
+    var selectedTab by remember { mutableStateOf("RECENT") }
+    var searchQuery by remember { mutableStateOf("") }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -50,16 +54,25 @@ fun TransactionHistoryScreen() {
         )
 
         TotalSavingsCard()
+
         SearchBar(
             placeholder = "Search transactions",
-            initialQuery = "",
+            initialQuery = searchQuery,
             onQueryChange = { newQuery ->
+                searchQuery = newQuery
                 // Handle the search query change
                 println("Transaction search query: $newQuery")
             }
         )
-        TransactionTabs()
-        TransactionList()
+
+        TransactionTabs(
+            selectedTab = selectedTab,
+            onTabSelected = { newTab ->
+                selectedTab = newTab
+            }
+        )
+
+        TransactionList(tabType = selectedTab, searchQuery = searchQuery)
     }
 }
 
@@ -156,12 +169,13 @@ fun SearchBar(
         )
     }
 
-
 @Composable
-fun TransactionTabs() {
+fun TransactionTabs(
+    selectedTab: String,
+    onTabSelected: (String) -> Unit
+) {
     Row(
         horizontalArrangement = Arrangement.SpaceBetween,
-        verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = 16.dp)
@@ -170,16 +184,17 @@ fun TransactionTabs() {
                 shape = RoundedCornerShape(6.dp)
             )
     ) {
-        TabButton("RECENT", true)
-        TabButton("DEBIT", false)
-        TabButton("CREDIT", false)
+        TabButton("RECENT", selectedTab == "RECENT") { onTabSelected("RECENT") }
+        TabButton("DEBIT", selectedTab == "DEBIT") { onTabSelected("DEBIT") }
+        TabButton("CREDIT", selectedTab == "CREDIT") { onTabSelected("CREDIT") }
     }
 }
 
+
 @Composable
-fun TabButton(text: String, isSelected: Boolean) {
+fun TabButton(text: String, isSelected: Boolean, onClick: () -> Unit) {
     Button(
-        onClick = { },
+        onClick = onClick,
         colors = ButtonDefaults.buttonColors(
             containerColor = if (isSelected) Green1 else Black1,
             contentColor = Color.White
@@ -190,9 +205,10 @@ fun TabButton(text: String, isSelected: Boolean) {
         Text(text)
     }
 }
+
 @Composable
-fun TransactionList() {
-    val transactions = listOf(
+fun TransactionList(tabType: String, searchQuery: String) {
+    val allTransactions = listOf(
         Transaction("METRO", "JUN 15, 2024 7:10 AM", -16, 2),
         Transaction("Zareen", "JUN 15, 2024 8:30 AM", 256, 0),
         Transaction("Atmos", "JUN 15, 2024 12:8 PM", -699, 20),
@@ -200,17 +216,31 @@ fun TransactionList() {
         Transaction("METRO", "JUN 14, 2024 8:18 PM", -16, 2)
     )
 
+    val filteredTransactions = allTransactions
+        .filter {
+            when (tabType) {
+                "DEBIT" -> it.amount < 0
+                "CREDIT" -> it.amount > 0
+                else -> true
+            }
+        }
+        .filter {
+            it.name.contains(searchQuery, ignoreCase = true) ||
+                    it.date.contains(searchQuery, ignoreCase = true)
+        }
+
     LazyColumn {
         item { Text("Today", modifier = Modifier.padding(16.dp)) }
-        items(transactions.take(3)) { transaction ->
+        items(filteredTransactions.filter { it.date.contains("JUN 15") }) { transaction ->
             TransactionItem(transaction)
         }
         item { Text("Yesterday", modifier = Modifier.padding(16.dp)) }
-        items(transactions.takeLast(2)) { transaction ->
+        items(filteredTransactions.filter { it.date.contains("JUN 14") }) { transaction ->
             TransactionItem(transaction)
         }
     }
 }
+
 
 @Composable
 fun TransactionItem(transaction: Transaction) {
@@ -243,7 +273,6 @@ fun TransactionItem(transaction: Transaction) {
         }
     }
 }
-
 
 data class Transaction(
     val name: String,

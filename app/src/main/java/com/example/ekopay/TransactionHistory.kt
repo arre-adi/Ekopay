@@ -36,7 +36,7 @@ import com.example.ekopay.ui.theme.Black1
 import com.example.ekopay.ui.theme.Green1
 
 @Composable @Preview(showBackground = true, showSystemUi = true)
-fun HistoryScreen() {
+fun TransactionHistoryScreen() {
     Column(
         modifier = Modifier
             .fillMaxSize()

@@ -1,7 +1,7 @@
 package com.example.ekopay
 
+import GeminiTextField
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.material3.ExposedDropdownMenuBox
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -9,20 +9,14 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
-import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -35,18 +29,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.example.ekopay.ui.theme.Black1
 import com.example.ekopay.ui.theme.Green1
 import com.example.ekopay.ui.theme.White1
-import com.google.ai.client.generativeai.GenerativeModel
-import com.google.ai.client.generativeai.type.GenerateContentResponse
-import kotlinx.coroutines.launch
 
 
 @Composable
@@ -65,13 +52,10 @@ fun LearningScreen() {
             )
         }
 
-        item {
-            Spacer(modifier = Modifier.height(8.dp))
+        item{
+            GeminiTextField()
         }
 
-        item {
-            GeminiSearchBar()
-        }
         item {
             Spacer(modifier = Modifier.height(16.dp))
         }
@@ -96,65 +80,6 @@ fun LearningScreen() {
 
 
 
-class GeminiViewModel : ViewModel() {
-    private val generativeModel = GenerativeModel(
-        modelName = "gemini-1.5-flash-001",
-        apiKey = "lull"
-    )
-
-    var searchQuery by mutableStateOf("")
-    var answer by mutableStateOf("")
-    var isLoading by mutableStateOf(false)
-
-    fun search() {
-        viewModelScope.launch {
-            isLoading = true
-            try {
-                val response: GenerateContentResponse = generativeModel.generateContent(searchQuery)
-                answer = response.text ?: "No answer found"
-            } catch (e: Exception) {
-                answer = "Error: ${e.message}"
-            } finally {
-                isLoading = false
-            }
-        }
-    }
-}
-
-
-
-@Composable
-fun GeminiSearchBar(viewModel: GeminiViewModel = androidx.lifecycle.viewmodel.compose.viewModel()) {
-        OutlinedTextField(
-            leadingIcon = {
-                IconButton(onClick = {/*TODO*/}){
-                    Icon(
-                        imageVector = Icons.Default.Search,
-                        contentDescription = "Search"
-                    )
-                }
-            },
-            value = viewModel.searchQuery,
-            onValueChange = { viewModel.searchQuery = it },
-            label = { Text("Ask questions") },
-            keyboardOptions = KeyboardOptions(
-                imeAction = ImeAction.Search
-            ),
-
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp)
-                .clip(RoundedCornerShape(12.dp))
-                .background(Color(0xFFF1F1F1)),
-            colors = TextFieldDefaults.colors(
-                disabledContainerColor = Color.Transparent,
-                focusedContainerColor = Color.Transparent,
-                unfocusedContainerColor = Color.Transparent,
-                focusedIndicatorColor = Color.Transparent,
-                unfocusedIndicatorColor = Color.Transparent
-            )
-        )
-    }
 
 @Composable
 fun FAQ() {

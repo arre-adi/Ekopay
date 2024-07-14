@@ -8,7 +8,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.ekopay.BottomBarScreen
 import com.example.ekopay.EcoBrickScreen
-import com.example.ekopay.HistoryScreen
+import com.example.ekopay.TransactionHistoryScreen
 import com.example.ekopay.LearningScreen
 import com.example.ekopay.ShoppingScreen
 import com.example.ekopay.ui.theme.Screens
@@ -27,7 +27,7 @@ fun BottomNavGraph(
         }
         composable(route = BottomBarScreen.History.route)
         {
-            HistoryScreen()
+            TransactionHistoryScreen()
         }
         composable(route = BottomBarScreen.Shopping.route)
         {

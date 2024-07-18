@@ -41,9 +41,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.ekopay.R
+import com.example.ekopay.bottomnav.Screens
 import com.example.ekopay.ui.theme.Black1
 import com.example.ekopay.ui.theme.Green1
-import com.example.ekopay.ui.theme.Screens
 import com.example.ekopay.ui.theme.White1
 
 @Composable
@@ -167,25 +167,29 @@ fun QuickActions(navController: NavController) {
             .padding(top = 16.dp),
         horizontalArrangement = Arrangement.SpaceAround
     ) {
-        QuickActionItem(
+        ActionButtons(
             icon = ImageVector.vectorResource(id = R.drawable.scanner),
             text = "Scan QR",
+            bgcolor = Black1,
             onClick = {  }
         )
-        QuickActionItem(
+        ActionButtons(
             icon = ImageVector.vectorResource(id = R.drawable.arrow_down),
             text = "Pay\r\nContacts",
+            bgcolor = Black1,
             iconSize = 60.dp,
             onClick = {}
         )
-        QuickActionItem(
+        ActionButtons(
             icon = ImageVector.vectorResource(id = R.drawable.empty_wallet),
             text = "Check\r\nBalance",
+            bgcolor = Black1,
             onClick = {  }
         )
-        QuickActionItem(
+        ActionButtons(
             icon = ImageVector.vectorResource(id = R.drawable.bag_2),
             text = "Shopping",
+            bgcolor = Black1,
             onClick = {  }
         )
     }
@@ -206,25 +210,29 @@ fun EarnCreditsSection(navController: NavController) {
                 .padding(top = 16.dp),
             horizontalArrangement = Arrangement.SpaceEvenly
         ) {
-            EarnCreditItem(
+            ActionButtons(
                 icon = ImageVector.vectorResource(id = R.drawable.noun_water_bottle_2583203),
                 text = "Deposit\nEco Brick",
                 iconSize = 40.dp,
+                bgcolor = Green1,
                 onClick = { navController.navigate(Screens.submitEcoBrick.route)}
             )
-            EarnCreditItem(
+            ActionButtons(
                 icon = ImageVector.vectorResource(id = R.drawable.energy_meter),
                 text = "Register\nEnergy Meter",
+                bgcolor = Green1,
                 onClick = { /*TODO*/}
             )
-            EarnCreditItem(
+            ActionButtons(
                 icon = ImageVector.vectorResource(id = R.drawable.noun_metro_3866657),
                 text = "Metro\nRecharge",
+                bgcolor = Green1,
                 onClick = { /*TODO*/}
             )
-            EarnCreditItem(
+            ActionButtons(
                 icon = ImageVector.vectorResource(id = R.drawable.noun_crowdfunding_850697),
                 text = "Crowd\nFunding",
+                bgcolor = Green1,
                 onClick = { /*TODO*/}
             )
         }
@@ -256,9 +264,21 @@ fun ShopGreenSection() {
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            ShopItem(image = painterResource(id = R.drawable.imgapple), name = "Organic Soap", price = "$5")
-            ShopItem(image = painterResource(id = R.drawable.imgapple), name = "Candles", price = "$10")
-            ShopItem(image = painterResource(id = R.drawable.imgapple), name = "Organic Apples", price = "$20")
+            ShopItem(
+                image = painterResource(id = R.drawable.imgapple),
+                name = "Organic Soap",
+                price = "$5"
+            )
+            ShopItem(
+                image = painterResource(id = R.drawable.imgapple),
+                name = "Candles",
+                price = "$10"
+            )
+            ShopItem(
+                image = painterResource(id = R.drawable.imgapple),
+                name = "Organic Apples",
+                price = "$20"
+            )
         }
     }
 }
@@ -268,7 +288,7 @@ fun ShopGreenSection() {
 
 //-------------------------COMPOSABLE FUNCTIONS---------------------------------------//
 @Composable
-fun QuickActionItem(icon: ImageVector, text: String, iconSize: Dp = 35.dp, onClick: () -> Unit) {
+fun ActionButtons(icon: ImageVector, text: String, iconSize: Dp = 35.dp, onClick: () -> Unit, bgcolor: Color ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
@@ -277,7 +297,7 @@ fun QuickActionItem(icon: ImageVector, text: String, iconSize: Dp = 35.dp, onCli
         Box(
             modifier = Modifier
                 .size(62.dp)
-                .background(Black1, shape = RoundedCornerShape(12.dp)),
+                .background(bgcolor, shape = RoundedCornerShape(12.dp)),
             contentAlignment = Alignment.Center
         ) {
             Icon(
@@ -297,35 +317,6 @@ fun QuickActionItem(icon: ImageVector, text: String, iconSize: Dp = 35.dp, onCli
     }
 }
 
-@Composable
-fun EarnCreditItem(icon: ImageVector, text: String, iconSize: Dp = 45.dp, onClick: () -> Unit) {
-    Column(
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center,
-    ) {
-        Box(
-            modifier = Modifier
-                .size(62.dp)
-                .clickable(onClick = onClick)
-                .background(Green1, shape = RoundedCornerShape(12.dp)),
-            contentAlignment = Alignment.Center
-        ) {
-            Icon(
-                imageVector = icon,
-                contentDescription = text,
-                tint = White1,
-                modifier = Modifier.size(iconSize)
-            )
-        }
-        Spacer(modifier = Modifier.height(4.dp))
-        Text(
-            text = text,
-            fontSize = 12.sp,
-            lineHeight = 14.sp,
-            textAlign = TextAlign.Center
-        )
-    }
-}
 
 @Composable
 fun GreenCreditInfoCard(question: String, navController: NavController) {

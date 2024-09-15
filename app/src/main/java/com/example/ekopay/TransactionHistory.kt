@@ -10,7 +10,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Button
@@ -109,7 +108,7 @@ fun TotalSavingsCard() {
         ) {
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
                 Text("TOTAL SAVINGS", color = Color.White)
-                Text("$5000", color = Green1, fontSize = 24.sp, fontWeight = FontWeight.Bold)
+                Text("₹5000", color = Green1, fontSize = 24.sp, fontWeight = FontWeight.Bold)
             }
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
                 Text("GREEN CREDITS", color = Color.White)
@@ -209,11 +208,11 @@ fun TabButton(text: String, isSelected: Boolean, onClick: () -> Unit) {
 @Composable
 fun TransactionList(tabType: String, searchQuery: String) {
     val allTransactions = listOf(
-        Transaction("METRO", "JUN 15, 2024 7:10 AM", -16, 2),
-        Transaction("Zareen", "JUN 15, 2024 8:30 AM", 256, 0),
-        Transaction("Atmos", "JUN 15, 2024 12:8 PM", -699, 20),
-        Transaction("Bamboo Studio", "JUN 14, 2024 10:12 PM", -146, 5),
-        Transaction("METRO", "JUN 14, 2024 8:18 PM", -16, 2)
+        Transaction("METRO", "JUN 15, 2024 7:10 AM", -16, 0.022),
+        Transaction("Zareen", "JUN 15, 2024 8:30 AM", 256, 0.00),
+        Transaction("Atmos", "JUN 15, 2024 12:8 PM", -699, 0.2),
+        Transaction("Bamboo Studio", "JUN 14, 2024 10:12 PM", -146, 0.5),
+        Transaction("METRO", "JUN 14, 2024 8:18 PM", -2616, 0.8)
     )
 
     val filteredTransactions = allTransactions
@@ -266,7 +265,7 @@ fun TransactionItem(transaction: Transaction) {
         }
         Column(horizontalAlignment = Alignment.End) {
             Text(
-                if (transaction.amount > 0) "+ $${transaction.amount}" else "- $${-transaction.amount}",
+                if (transaction.amount > 0) "+ ₹${transaction.amount}" else "- ₹${-transaction.amount}",
                 color = if (transaction.amount > 0) Black1 else Color.Red
             )
             Text("${transaction.greenCredits} GC", fontSize = 12.sp, color = Green1)
@@ -278,5 +277,5 @@ data class Transaction(
     val name: String,
     val date: String,
     val amount: Int,
-    val greenCredits: Int
+    val greenCredits: Double
 )

@@ -185,46 +185,46 @@ fun VideoTutorials() {
                 "Recycling tips and tricks"
             )
 
-            items(tutorialTitles) { title ->
-                VideoTutorialItem(title)
-            }
+//            items(tutorialTitles) { title ->
+//                VideoTutorialItem(title)
+//            }
         }
     }
 }
 
-@Composable
-fun VideoTutorialItem(title: String) {
-    Column(
-        modifier = Modifier
-            .width(140.dp)
-            .height(200.dp)
-            .clip(RoundedCornerShape(12.dp))
-            .background(Green1)
-            .padding(8.dp),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.SpaceBetween
-    ) {
-        Box(
-            modifier = Modifier
-                .weight(1f)
-                .fillMaxWidth(),
-            contentAlignment = Alignment.Center
-        ) {
-            Icon(
-                ImageVector.vectorResource(id = R.drawable.baseline_play_arrow_24),
-                contentDescription = "Play",
-                tint = White1,
-                modifier = Modifier.size(54.dp)
-            )
-        }
-        Spacer(modifier = Modifier.height(4.dp))
-        Text(
-            text = title,
-            color = Color.Black,
-            style = MaterialTheme.typography.bodyMedium,
-            maxLines = 2
-        )
-    }
-}
-
-
+//@Composable
+//fun VideoTutorialItem(title: String) {
+//    Column(
+//        modifier = Modifier
+//            .width(140.dp)
+//            .height(200.dp)
+//            .clip(RoundedCornerShape(12.dp))
+//            .background(Green1)
+//            .padding(8.dp),
+//        horizontalAlignment = Alignment.CenterHorizontally,
+//        verticalArrangement = Arrangement.SpaceBetween
+//    ) {
+//        Box(
+//            modifier = Modifier
+//                .weight(1f)
+//                .fillMaxWidth(),
+//            contentAlignment = Alignment.Center
+//        ) {
+//            Icon(
+//                ImageVector.vectorResource(id = R.drawable.baseline_play_arrow_24),
+//                contentDescription = "Play",
+//                tint = White1,
+//                modifier = Modifier.size(54.dp)
+//            )
+//        }
+//        Spacer(modifier = Modifier.height(4.dp))
+//        Text(
+//            text = title,
+//            color = Color.Black,
+//            style = MaterialTheme.typography.bodyMedium,
+//            maxLines = 2
+//        )
+//    }
+//}
+//
+//

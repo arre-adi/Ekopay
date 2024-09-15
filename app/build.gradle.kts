@@ -10,7 +10,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.ekopay"
-        minSdk = 24
+        minSdk = 26
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -62,6 +62,11 @@ dependencies {
     implementation(libs.androidx.material3)
     implementation(libs.androidx.benchmark.macro)
     implementation(libs.androidx.navigation.compose)
+    implementation(libs.vision.common)
+    implementation(libs.play.services.mlkit.barcode.scanning)
+    implementation(libs.androidx.camera.core)
+    implementation(libs.androidx.camera.lifecycle)
+    implementation(libs.androidx.camera.view)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -71,5 +76,11 @@ dependencies {
     debugImplementation(libs.androidx.ui.test.manifest)
     implementation(libs.generativeai)
     implementation(libs.androidx.lifecycle.viewmodel.compose)
+    implementation(libs.ycharts)
+
+// In your build.gradle.kts (Module)
+    implementation(libs.androidx.camera.camera2)
+
+
 
 }

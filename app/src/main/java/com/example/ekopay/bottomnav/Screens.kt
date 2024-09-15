@@ -1,12 +1,12 @@
 package com.example.ekopay.bottomnav
 
+import android.service.quickaccesswallet.SelectWalletCardRequest
 import com.example.ekopay.R
 
 sealed class Screens(
     val route:String
 ) {
     object submitEcoBrick : Screens("submit_eco_brick")
-    object learning : Screens("learn_more")
 }
 
 sealed class BottomBarScreen(

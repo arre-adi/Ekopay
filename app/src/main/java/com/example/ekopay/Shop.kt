@@ -49,11 +49,11 @@ fun ShoppingScreen() {
 @Composable
 fun ProductGrid() {
     val products = listOf(
-        Product("Organic Soap", "Cosmetic", 5, 2, R.drawable.img_soap),
-        Product("Apples", "Homegrown", 20, 5, R.drawable.imgapple),
-        Product("Candles", "Home Decor", 10, 1, R.drawable.img_candle4),
-        Product("Organic Soap", "Cosmetic", 5, 2, R.drawable.img_soap),
-        Product("Apples", "Homegrown", 20, 5, R.drawable.imgapple)
+        Product("Organic Soap", "Cosmetic", 50, 0.2, R.drawable.img_soap),
+        Product("Apples", "Homegrown", 200, 0.5, R.drawable.imgapple),
+        Product("Candles", "Home Decor", 100, 0.1, R.drawable.img_candle),
+        Product("Organic Soap", "Cosmetic", 45, 0.3, R.drawable.img_soap),
+        Product("Apples", "Organic", 80, 0.4, R.drawable.imgapple)
     )
 
     LazyVerticalGrid(
@@ -94,7 +94,7 @@ fun ProductCard(product: Product) {
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
-                    Text(text = "$${product.price}", fontWeight = FontWeight.Bold)
+                    Text(text = "₹${product.price}", fontWeight = FontWeight.Bold)
                     Text(text = "${product.greenCredits}GC", color = Green1)
                 }
             }
@@ -109,6 +109,6 @@ data class Product(
     val name: String,
     val category: String,
     val price: Int,
-    val greenCredits: Int,
+    val greenCredits: Double,
     val imageRes: Int
 )

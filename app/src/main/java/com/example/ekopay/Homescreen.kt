@@ -36,15 +36,26 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.ekopay.R
+import com.example.ekopay.bottomnav.BottomBarScreen
 import com.example.ekopay.bottomnav.Screens
 import com.example.ekopay.ui.theme.Black1
 import com.example.ekopay.ui.theme.Green1
 import com.example.ekopay.ui.theme.White1
+
+
+@Preview(showBackground = true)
+@Composable
+fun GreenCreditAppPreview() {
+    val navController = rememberNavController()
+    GreenCreditApp(navController = navController)
+}
 
 @Composable
 fun GreenCreditApp(navController: NavController) {
@@ -171,7 +182,7 @@ fun QuickActions(navController: NavController) {
             icon = ImageVector.vectorResource(id = R.drawable.scanner),
             text = "Scan QR",
             bgcolor = Black1,
-            onClick = {  }
+            onClick = {  navController.navigate("qrscanner")}
         )
         ActionButtons(
             icon = ImageVector.vectorResource(id = R.drawable.arrow_down),
@@ -190,7 +201,7 @@ fun QuickActions(navController: NavController) {
             icon = ImageVector.vectorResource(id = R.drawable.bag_2),
             text = "Shopping",
             bgcolor = Black1,
-            onClick = {  }
+            onClick = {  navController.navigate(BottomBarScreen.Shopping.route)}
         )
     }
 }
@@ -210,24 +221,25 @@ fun EarnCreditsSection(navController: NavController) {
                 .padding(top = 16.dp),
             horizontalArrangement = Arrangement.SpaceEvenly
         ) {
-            ActionButtons(
-                icon = ImageVector.vectorResource(id = R.drawable.noun_water_bottle_2583203),
-                text = "Deposit\nEco Brick",
-                iconSize = 40.dp,
-                bgcolor = Green1,
-                onClick = { navController.navigate(Screens.submitEcoBrick.route)}
-            )
-            ActionButtons(
-                icon = ImageVector.vectorResource(id = R.drawable.energy_meter),
-                text = "Register\nEnergy Meter",
-                bgcolor = Green1,
-                onClick = { /*TODO*/}
-            )
+//            ActionButtons(
+//                icon = ImageVector.vectorResource(id = R.drawable.noun_water_bottle_2583203),
+//                text = "Deposit\nEco Brick",
+//                iconSize = 40.dp,
+//                bgcolor = Green1,
+//                onClick = { navController.navigate(Screens.submitEcoBrick.route)}
+//            )
+
+//            ActionButtons(
+//                icon = ImageVector.vectorResource(id = R.drawable.energy_meter),
+//                text = "Register\nEnergy Meter",
+//                bgcolor = Green1,
+//                onClick = { /*TODO*/}
+//            )
             ActionButtons(
                 icon = ImageVector.vectorResource(id = R.drawable.noun_metro_3866657),
                 text = "Metro\nRecharge",
                 bgcolor = Green1,
-                onClick = { /*TODO*/}
+                onClick = { navController.navigate("selectmetro")}
             )
             ActionButtons(
                 icon = ImageVector.vectorResource(id = R.drawable.noun_crowdfunding_850697),
@@ -265,19 +277,19 @@ fun ShopGreenSection() {
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             ShopItem(
-                image = painterResource(id = R.drawable.imgapple),
+                image = painterResource(id = R.drawable.img_soap),
                 name = "Organic Soap",
-                price = "$5"
+                price = "₹50"
             )
             ShopItem(
-                image = painterResource(id = R.drawable.imgapple),
+                image = painterResource(id = R.drawable.img_candle),
                 name = "Candles",
-                price = "$10"
+                price = "₹10"
             )
             ShopItem(
                 image = painterResource(id = R.drawable.imgapple),
                 name = "Organic Apples",
-                price = "$20"
+                price = "₹200"
             )
         }
     }
@@ -322,7 +334,7 @@ fun ActionButtons(icon: ImageVector, text: String, iconSize: Dp = 35.dp, onClick
 fun GreenCreditInfoCard(question: String, navController: NavController) {
     Card(
         modifier = Modifier
-            .clickable(onClick = {navController.navigate(Screens.learning.route)})
+            .clickable(onClick = {navController.navigate("learning")})
             .wrapContentWidth()
             .height(120.dp)
             .padding(start = 16.dp, top = 16.dp, bottom = 16.dp)

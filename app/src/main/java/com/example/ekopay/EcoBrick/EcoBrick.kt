@@ -1,4 +1,4 @@
-package com.example.ekopay
+package com.example.ekopay.EcoBrick
 
 import ActionButtons
 import WelcomeBar
@@ -12,6 +12,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.foundation.layout.*
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
+import com.example.ekopay.R
 import com.example.ekopay.ui.theme.Green1
 
 @Preview(showBackground = true, showSystemUi = true)

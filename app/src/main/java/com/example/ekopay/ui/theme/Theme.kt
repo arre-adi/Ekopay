@@ -13,7 +13,7 @@ import androidx.compose.ui.graphics.Color.Companion.White
 val TextPrimary = Color(0xFF000000)
 val TextSecondary = Color(0xFF666666)
 
-private val LightColorScheme = lightColorScheme(
+private val LightColorScheme =   lightColorScheme(
     primary = White,
     onPrimary = Black,
     secondary = White,

@@ -71,7 +71,7 @@ fun GreenCreditApp(navController: NavController) {
             userName = "John",
             userGreeting = "hello John,",
             balanceText = "YOUR BALANCE",
-            balanceAmount = "500 GC"
+            balanceAmount = "15 GC"
         )}
         item{QuickActions(navController)}
         item{EarnCreditsSection(navController)}
@@ -245,7 +245,7 @@ fun EarnCreditsSection(navController: NavController) {
                 icon = ImageVector.vectorResource(id = R.drawable.noun_crowdfunding_850697),
                 text = "Crowd\nFunding",
                 bgcolor = Green1,
-                onClick = { /*TODO*/}
+                onClick = {navController.navigate("crowwwd_funding")}
             )
         }
     }

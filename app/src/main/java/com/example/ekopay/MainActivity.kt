@@ -12,6 +12,7 @@ import androidx.core.content.ContextCompat
 import com.example.ekopay.bottomnav.MainScreen
 import com.example.ekopay.ui.theme.EKOPAYTheme
 import android.Manifest
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.google.ai.client.generativeai.BuildConfig
 
 class MainActivity : ComponentActivity() {
@@ -20,7 +21,6 @@ class MainActivity : ComponentActivity() {
         ActivityResultContracts.RequestPermission()
     ) { isGranted: Boolean ->
         if (isGranted) {
-            // Permission granted, continue with the app
             setContent {
                 EKOPAYTheme {
                     MainScreen()

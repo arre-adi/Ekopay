@@ -3,7 +3,10 @@
 
     <style name="Theme.EKOPAY" parent="android:Theme.Material.Light.NoActionBar">
     <item name="colorPrimary">@color/white</item>
-
-
     </style>
+
+    <style name="splashScreenTheme" parent="Theme.SplashScreen">
+    <item name="windowSplashScreenBackground">@color/green1</item>
+    <item name="postSplashScreenTheme">@style/Theme.EKOPAY</item>
+</style>
 </resources>

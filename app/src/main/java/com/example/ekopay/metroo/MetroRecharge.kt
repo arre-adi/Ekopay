@@ -84,7 +84,7 @@ fun SelectMetroScreen(navController: NavController) {
 
         Spacer(modifier = Modifier.weight(1f))
 
-        // Paytm Banner
+        //  Banner
         Box(
             contentAlignment = Alignment.Center,
             modifier = Modifier

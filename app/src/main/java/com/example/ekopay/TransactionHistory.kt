@@ -112,7 +112,7 @@ fun TotalSavingsCard() {
             }
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
                 Text("GREEN CREDITS", color = Color.White)
-                Text("400 GC", color = Green1, fontSize = 24.sp, fontWeight = FontWeight.Bold)
+                Text("15 GC", color = Green1, fontSize = 24.sp, fontWeight = FontWeight.Bold)
             }
         }
     }
@@ -209,7 +209,7 @@ fun TabButton(text: String, isSelected: Boolean, onClick: () -> Unit) {
 fun TransactionList(tabType: String, searchQuery: String) {
     val allTransactions = listOf(
         Transaction("METRO", "JUN 15, 2024 7:10 AM", -16, 0.022),
-        Transaction("Zareen", "JUN 15, 2024 8:30 AM", 256, 0.00),
+        Transaction("Sisiphus", "JUN 15, 2024 8:30 AM", 256, 0.00),
         Transaction("Atmos", "JUN 15, 2024 12:8 PM", -699, 0.2),
         Transaction("Bamboo Studio", "JUN 14, 2024 10:12 PM", -146, 0.5),
         Transaction("METRO", "JUN 14, 2024 8:18 PM", -2616, 0.8)

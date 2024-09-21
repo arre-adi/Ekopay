@@ -114,7 +114,7 @@ fun BengaluruMetroUI(navController: NavController) {
 
 @Composable
 fun MetroPriceScreen(navController: NavController, metroCardNumber: String, amount: String) {
-    val calculatedAmount = amount.toDoubleOrNull()?.times(0.002) ?: 0.0
+    val calculatedAmount = amount.toDoubleOrNull()?.times(0.0002) ?: 0.0
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,

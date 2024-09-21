@@ -5,6 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -20,34 +21,28 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import com.example.ekopay.ui.theme.Green1
 
-@Composable @Preview(showBackground = true, showSystemUi = true)
-fun ShoppingScreen() {
+
+@Composable
+fun ShoppingScreen(navController: NavHostController) {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color.White)
+            .padding(16.dp)
     ) {
         Text(
             text = "Marketplace",
-            modifier = Modifier.padding(16.dp),
-            fontSize = 24.sp,
-            fontWeight = FontWeight.Bold
+            style = MaterialTheme.typography.headlineMedium
         )
-        SearchBar(
-            placeholder = "Search items",
-            initialQuery = "",
-            onQueryChange = { newQuery ->
-                println("Search query: $newQuery")
-            }
-        )
-        ProductGrid()
+        Spacer(modifier = Modifier.height(16.dp))
+        ProductGrid(navController)
     }
 }
 
 @Composable
-fun ProductGrid() {
+fun ProductGrid(navController: NavHostController) {
     val products = listOf(
         Product("Organic Soap", "Cosmetic", 50, 0.2, R.drawable.img_soap),
         Product("Apples", "Homegrown", 200, 0.5, R.drawable.imgapple),
@@ -61,19 +56,19 @@ fun ProductGrid() {
         contentPadding = PaddingValues(8.dp)
     ) {
         items(products) { product ->
-            ProductCard(product)
+            ProductCard(product, navController)
         }
     }
 }
 
 @Composable
-fun ProductCard(product: Product) {
+fun ProductCard(product: Product, navController: NavHostController) {
     Card(
         modifier = Modifier
             .padding(8.dp)
-            .shadow(2.dp, RoundedCornerShape(8.dp))
-            .fillMaxWidth(),
-        shape = RoundedCornerShape(8.dp)
+            .clickable {
+                navController.navigate("productCardFinal")
+            }
     ) {
         Column (
             Modifier.background(Color.White)

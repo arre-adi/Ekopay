@@ -12,6 +12,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -24,11 +26,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.ekopay.ui.theme.Black1
 import com.example.ekopay.ui.theme.Green1
 
 
 @Composable @Preview(showBackground = true, showSystemUi = true)
-fun ProductCard() {
+fun ProductCardfinal() {
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -44,8 +47,7 @@ fun ProductCard() {
                 contentDescription = "Product Image",
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(150.dp)
-                    .padding(8.dp)
+                    .height(300.dp)
                     .background(Color.LightGray),
                 contentScale = ContentScale.Crop
             )
@@ -57,14 +59,14 @@ fun ProductCard() {
                 text = "Organic Apples",
                 style = MaterialTheme.typography.bodyLarge.copy(
                     fontWeight = FontWeight.Bold,
-                    fontSize = 20.sp
+                    fontSize = 22.sp
                 )
             )
 
             Text(
                 text = "Homegrown",
                 style = MaterialTheme.typography.bodySmall.copy(
-                    fontSize = 14.sp,
+                    fontSize = 18.sp,
                     color = Color.Gray
                 )
             )
@@ -81,14 +83,14 @@ fun ProductCard() {
                     text = "₹200",
                     style = MaterialTheme.typography.bodyLarge.copy(
                         fontWeight = FontWeight.Bold,
-                        fontSize = 24.sp
+                        fontSize = 28.sp
                     )
                 )
 
                 Text(
                     text = "0.5GC",
                     style = MaterialTheme.typography.bodyLarge.copy(
-                        fontSize = 20.sp,
+                        fontSize = 26.sp,
                         color = Green1,
                         fontWeight = FontWeight.SemiBold
                     )
@@ -101,10 +103,27 @@ fun ProductCard() {
             Text(
                 text = "These apples used 50% less water while growing and 90% less pesticides",
                 style = MaterialTheme.typography.bodySmall.copy(
-                    fontSize = 14.sp,
-                    color = Color.Gray
+                    fontSize = 20.sp,
+                    lineHeight = 22.sp,
+                    color = Color.Gray,
                 )
             )
+            Spacer(modifier = Modifier
+                .height(150.dp))
+            Button(
+                onClick = { /*TODO*/
+                },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(50.dp),
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Black1,
+                    contentColor = Color.White
+                ),
+                shape = RoundedCornerShape(12.dp)
+            ) {
+                Text("ADD TO CART")
+            }
         }
     }
 }

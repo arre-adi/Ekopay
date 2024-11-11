@@ -1,7 +1,6 @@
-package com.example.ekopay.EcoBrick
+package com.example.ekopay.futurescreens
 
 import ActionButtons
-import WelcomeBar
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -13,6 +12,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
 import com.example.ekopay.R
+import com.example.ekopay.WelcomeBar
 import com.example.ekopay.ui.theme.Green1
 
 @Preview(showBackground = true, showSystemUi = true)

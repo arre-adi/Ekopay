@@ -1,7 +1,6 @@
-package com.example.ekopay
+package com.example.ekopay.futurescreens
 
 import android.graphics.Bitmap
-import android.net.Uri
 import android.util.Log
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
@@ -15,7 +14,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import coil.compose.rememberAsyncImagePainter
 import kotlinx.coroutines.launch
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -144,7 +142,9 @@ fun JainScreen() {
                 try {
                     // Convert bitmap to base64 string (implementation not shown)
                     val base64Image = bitmapToBase64(bitmap)
-                    val response = ApiClient.imageRecognitionApi.recognizeImage(ImageRecognitionRequest(base64Image))
+                    val response = ApiClient.imageRecognitionApi.recognizeImage(
+                        ImageRecognitionRequest(base64Image)
+                    )
                     selectedItem = response.itemName
                 } catch (e: Exception) {
                     Log.e("API Error", "Failed to recognize image", e)

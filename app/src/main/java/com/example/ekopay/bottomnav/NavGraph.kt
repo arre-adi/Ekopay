@@ -4,10 +4,8 @@ package com.example.ekopay.bottomnav
 import GreenCreditApp
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
@@ -16,7 +14,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.example.ekopay.AddMoney
 import com.example.ekopay.CrowdFundingPaymentScreen
-import com.example.ekopay.EcoBrick.EcoBrickScreen
+import com.example.ekopay.futurescreens.EcoBrickScreen
 import com.example.ekopay.FinalTradingScreen
 import com.example.ekopay.FundingPreview
 import com.example.ekopay.TransactionHistoryScreen

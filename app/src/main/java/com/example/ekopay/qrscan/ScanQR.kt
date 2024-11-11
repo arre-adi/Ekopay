@@ -14,8 +14,13 @@ import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -124,20 +129,110 @@ fun QRScannerScreen(
                 modifier = Modifier.fillMaxSize()
             )
             isLoading = false
+
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(Color.Black.copy(alpha = 0.5f))
+            ) {
+
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(16.dp),
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+                    IconButton(
+                        onClick = { navController.navigateUp() },
+                        modifier = Modifier
+                            .background(
+                                color = Color.Black.copy(alpha = 0.3f),
+                                shape = CircleShape
+                            )
+                    ) {
+                        Icon(
+                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                            contentDescription = "Back",
+                            tint = Color.White
+                        )
+                    }
+
+                    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                        IconButton(
+                            onClick = { /* Handle flash */ },
+                            modifier = Modifier
+                                .background(
+                                    color = Color.Black.copy(alpha = 0.3f),
+                                    shape = CircleShape
+                                )
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.Refresh,
+                                contentDescription = "Flash",
+                                tint = Color.White
+                            )
+                        }
+
+                    }
+                }
+
+                // Scanning frame
+                Box(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Box(
+                        modifier = Modifier
+                            .size(280.dp)
+                            .border(
+                                width = 2.dp,
+                                color = Color.White,
+                                shape = RoundedCornerShape(8.dp)
+                            )
+                    ) {
+
+                    }
+                }
+
+
+                Button(
+                    onClick = { /* Handle image picker */ },
+                    modifier = Modifier
+                        .align(Alignment.BottomCenter)
+                        .padding(bottom = 100.dp),
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = Color.White.copy(alpha = 0.2f)
+                    )
+                ) {
+                    Text("Upload from gallery", color = Color.White)
+                }
+            }
+        }
         }
 
         if (!hasCameraPermission && !isLoading) {
             Text(
                 "Camera permission is required to scan QR codes",
-                modifier = Modifier.align(Alignment.Center)
+
             )
         }
 
         if (isLoading) {
-            CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
+            Box(
+                modifier = Modifier.fillMaxSize(),
+                contentAlignment = Alignment.Center
+            ) {
+                CircularProgressIndicator(
+                    modifier = Modifier.size(50.dp),
+                    color = Color.White,
+                    strokeWidth = 4.dp
+                )
+            }
         }
     }
-}
+
 
 class QRCodeAnalyzer(private val onQRCodeScanned: (String) -> Unit) : ImageAnalysis.Analyzer {
     private val scanner = BarcodeScanning.getClient()
@@ -207,16 +302,16 @@ fun SuccessScreen(navController: NavController) {
     }
 }
 
-@androidx.compose.ui.tooling.preview.Preview(showBackground = true, showSystemUi = true)
+@androidx.compose.ui.tooling.preview.Preview(showBackground = false, showSystemUi = true)
 @Composable
 fun QRScannerScreenPreview() {
     val navController = rememberNavController()
     QRScannerScreen(navController = navController)
 }
-
-@androidx.compose.ui.tooling.preview.Preview(showBackground = true, showSystemUi = true)
-@Composable
-fun SuccessScreenPreview() {
-    val navController = rememberNavController()
-    SuccessScreen(navController = navController)
-}
+//
+//@androidx.compose.ui.tooling.preview.Preview(showBackground = true, showSystemUi = true)
+//@Composable
+//fun SuccessScreenPreview() {
+//    val navController = rememberNavController()
+//    SuccessScreen(navController = navController)
+//}

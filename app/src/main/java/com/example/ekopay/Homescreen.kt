@@ -43,8 +43,8 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.ekopay.R
+import com.example.ekopay.WelcomeBar
 import com.example.ekopay.bottomnav.BottomBarScreen
-import com.example.ekopay.bottomnav.Screens
 import com.example.ekopay.ui.theme.Black1
 import com.example.ekopay.ui.theme.Green1
 import com.example.ekopay.ui.theme.White1
@@ -57,6 +57,11 @@ fun GreenCreditAppPreview() {
     GreenCreditApp(navController = navController)
 }
 
+
+
+
+
+
 @Composable
 fun GreenCreditApp(navController: NavController) {
     LazyColumn(
@@ -68,106 +73,19 @@ fun GreenCreditApp(navController: NavController) {
 
     ) {
         item{WelcomeBar(
-            userName = "John",
-            userGreeting = "hello John,",
-            balanceText = "YOUR BALANCE",
+            userName = "Welcome Back",
+            userGreeting = "hello john",
+            balanceText = "BALANCE",
             balanceAmount = "15 GC"
         )}
         item{QuickActions(navController)}
         item{EarnCreditsSection(navController)}
-        item{WhatIsGreenCreditCard(navController)}
+        item{LearnSection(navController)}
         item{ShopGreenSection()}
     }
 }
 
-@Composable
-fun WelcomeBar(
-    userName: String ,
-    userGreeting: String ,
-    balanceText: String ,
-    balanceAmount: String
-) {
-    Box(
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(120.dp)
-    ) {
-        Image(
-            painter = painterResource(id = R.drawable.frame_1),
-            contentDescription = null,
-            contentScale = ContentScale.FillHeight,
-            modifier = Modifier
-                .matchParentSize()
-                .background(
-                    Green1,
-                    shape = RoundedCornerShape(topStart = 12.dp, topEnd = 12.dp)
-                )
-        )
 
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(top = 16.dp)
-        ) {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .background(Color.Transparent)
-                    .padding(16.dp),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-
-                Icon(
-                    ImageVector.vectorResource(id = R.drawable.baseline_account_circle_24),
-                    modifier = Modifier
-                        .size(50.dp)
-                        .padding(end = 10.dp),
-                    contentDescription = "User"
-                )
-                Column {
-                    Text(
-                        userGreeting,
-                        style = MaterialTheme.typography.titleLarge,
-                        color = Color.White
-                    )
-                    Text(
-                        userName,
-                        color = Color.White,
-                        style = MaterialTheme.typography.titleLarge,
-                        fontWeight = FontWeight.Bold
-                    )
-                }
-            }
-        }
-    }
-
-    Row(
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.SpaceBetween,
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(80.dp)
-            .background(
-                Color.Black,
-                shape = RoundedCornerShape(bottomStart = 12.dp, bottomEnd = 12.dp)
-            )
-            .padding(16.dp)
-
-    ) {
-        Text(
-            balanceText,
-            style = MaterialTheme.typography.bodyLarge,
-            fontWeight = FontWeight(400),
-            color = Color.White
-        )
-        Text(
-            balanceAmount,
-            style = MaterialTheme.typography.headlineSmall,
-            fontWeight = FontWeight(600),
-            color = Green1
-        )
-    }
-}
 
 
 @Composable
@@ -176,7 +94,7 @@ fun QuickActions(navController: NavController) {
         modifier = Modifier
             .fillMaxWidth()
             .padding(top = 16.dp),
-        horizontalArrangement = Arrangement.SpaceAround
+        horizontalArrangement = Arrangement.SpaceEvenly
     ) {
         ActionButtons(
             icon = ImageVector.vectorResource(id = R.drawable.scanner),
@@ -196,12 +114,6 @@ fun QuickActions(navController: NavController) {
             text = "Check\r\nBalance",
             bgcolor = Black1,
             onClick = {  }
-        )
-        ActionButtons(
-            icon = ImageVector.vectorResource(id = R.drawable.bag_2),
-            text = "Shopping",
-            bgcolor = Black1,
-            onClick = {  navController.navigate(BottomBarScreen.Shopping.route)}
         )
     }
 }
@@ -247,13 +159,20 @@ fun EarnCreditsSection(navController: NavController) {
                 bgcolor = Green1,
                 onClick = {navController.navigate("crowwwd_funding")}
             )
+
+            ActionButtons(
+                icon = ImageVector.vectorResource(id = R.drawable.bag_2),
+                text = "Shopping",
+                bgcolor = Green1,
+                onClick = {  navController.navigate(BottomBarScreen.Shopping.route)}
+            )
         }
     }
 }
 
 
 @Composable
-fun WhatIsGreenCreditCard(navController: NavController) {
+fun LearnSection(navController: NavController) {
 
     LazyRow(modifier = Modifier.fillMaxWidth()) {
         items(listOf("What is green credit?", "How to earn green credit?")) { question ->
@@ -264,7 +183,7 @@ fun WhatIsGreenCreditCard(navController: NavController) {
 @Composable
 fun ShopGreenSection() {
     Column(modifier = Modifier
-        .padding(start = 16.dp, bottom = 16.dp)) {
+        .padding(bottom = 16.dp)) {
         Text("Shop Green",
             style = MaterialTheme.typography.bodyLarge,
             color = Green1,
@@ -273,7 +192,8 @@ fun ShopGreenSection() {
                 .padding(top =0.dp, bottom = 16.dp))
 
         Row(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier.fillMaxWidth()
+                .padding(start = 16.dp),
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             ShopItem(

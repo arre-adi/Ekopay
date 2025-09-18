@@ -79,10 +79,8 @@ dependencies {
     implementation(libs.ycharts)
     implementation(libs.androidx.core.splashscreen)
 
-// In your build.gradle.kts (Module)
     implementation(libs.androidx.camera.camera2)
 
-    //
 
     implementation(libs.retrofit)
     implementation(libs.converter.gson)

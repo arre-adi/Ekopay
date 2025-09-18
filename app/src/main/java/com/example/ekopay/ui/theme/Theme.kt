@@ -22,7 +22,7 @@ private val LightColorScheme =   lightColorScheme(
     surface = White,
 )
 
-@Composable
+@Composable//
 fun EKOPAYTheme(
     content: @Composable () -> Unit
 ) {

@@ -1,6 +1,5 @@
 package com.example.ekopay
 
-import GeminiTextField
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.widget.Toast
@@ -9,11 +8,9 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
-import com.example.ekopay.bottomnav.MainScreen
+import com.example.ekopay.core.navigation.MainScreen
 import com.example.ekopay.ui.theme.EKOPAYTheme
 import android.Manifest
-import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import com.google.ai.client.generativeai.BuildConfig
 
 class MainActivity : ComponentActivity() {
 

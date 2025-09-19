@@ -9,7 +9,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import com.example.ekopay.core.navigation.MainScreen
-import com.example.ekopay.ui.theme.EKOPAYTheme
+import com.example.ekopay.ui.theme.EkopayTheme
 import android.Manifest
 
 class MainActivity : ComponentActivity() {
@@ -19,7 +19,7 @@ class MainActivity : ComponentActivity() {
     ) { isGranted: Boolean ->
         if (isGranted) {
             setContent {
-                EKOPAYTheme {
+                EkopayTheme {
                     MainScreen()
                 }
             }
@@ -39,7 +39,7 @@ class MainActivity : ComponentActivity() {
             == PackageManager.PERMISSION_GRANTED) {
             // If permission is already granted, proceed
             setContent {
-                EKOPAYTheme {
+                EkopayTheme {
                     MainScreen()
                 }
             }

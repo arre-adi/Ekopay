@@ -42,11 +42,11 @@ fun ShoppingScreen(navController: NavHostController) {
 @Composable
 fun ProductGrid(navController: NavHostController) {
     val products = listOf(
-        Product("Organic Soap", "Cosmetic", 50, 0.2, R.drawable.img_soap),
-        Product("Apples", "Homegrown", 200, 0.5, R.drawable.imgapple),
-        Product("Candles", "Home Decor", 100, 0.1, R.drawable.img_candle),
-        Product("Organic Soap", "Cosmetic", 45, 0.3, R.drawable.img_soap),
-        Product("Apples", "Organic", 80, 0.4, R.drawable.imgapple)
+        Product("Organic Soap", "Cosmetic", 50, 0.2, R.drawable.img_product_soap),
+        Product("Apples", "Homegrown", 200, 0.5, R.drawable.img_product_apple),
+        Product("Candles", "Home Decor", 100, 0.1, R.drawable.img_product_candle),
+        Product("Organic Soap", "Cosmetic", 45, 0.3, R.drawable.img_product_soap),
+        Product("Apples", "Organic", 80, 0.4, R.drawable.img_product_apple)
     )
 
     LazyVerticalGrid(

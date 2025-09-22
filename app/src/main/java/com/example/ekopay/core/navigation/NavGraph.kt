@@ -1,12 +1,13 @@
 package com.example.ekopay.core.navigation
 
-
-import GreenCreditApp
+import EkopayApp
+import android.content.Context
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -30,86 +31,118 @@ import com.example.ekopay.feature.metro.ui.DelhiMetroScreen
 import com.example.ekopay.feature.metro.ui.KochiMetroScreen
 import com.example.ekopay.feature.metro.ui.MetroPriceScreen
 import com.example.ekopay.feature.metro.ui.SelectMetroScreen
+import com.example.ekopay.feature.onboarding.ui.OnboardingFlow
 import com.example.ekopay.feature.payments.ui.paymentcompletescreen
+import kotlinx.coroutines.flow.map
+import androidx.datastore.preferences.core.booleanPreferencesKey
+import androidx.datastore.preferences.preferencesDataStore
+import androidx.datastore.preferences.core.edit
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+
+
+// DataStore for onboarding preference
+private val Context.dataStore by preferencesDataStore("user_preferences")
+private val ONBOARDING_COMPLETED = booleanPreferencesKey("onboarding_completed")
 
 @Composable
 fun BottomNavGraph(navController: NavHostController) {
-    val shouldShowOnboarding = remember { mutableStateOf(true) }
+    val context = LocalContext.current
+
+    // Check if onboarding is completed using DataStore
+    val onboardingCompleted by context.dataStore.data
+        .map { preferences ->
+            preferences[ONBOARDING_COMPLETED] ?: false
+        }
+        .collectAsState(initial = false)
 
     NavHost(
         navController = navController,
-        startDestination = if (shouldShowOnboarding.value) "onboarding1" else BottomBarScreen.Home.route,
+        startDestination = if (onboardingCompleted) BottomBarScreen.Home.route else "onboarding_flow",
         modifier = Modifier.navigationBarsPadding()
     ) {
-        composable("onboarding1") {
-            OnboardingScreen1 {
-                navController.navigate("onboarding2")
-            }
-        }
-        composable("onboarding2") {
-            OnboardingScreen2 {
-                navController.navigate("onboarding3")
-            }
-        }
-        composable("onboarding3") {
-            OnboardingScreen3 {
-                navController.navigate(BottomBarScreen.Home.route) {
-                    popUpTo("onboarding1") { inclusive = true }
+        // Modern onboarding flow - single composable that handles everything
+        composable("onboarding_flow") {
+            OnboardingFlow(
+                onComplete = {
+                    // Save onboarding completion and navigate to home
+                    saveOnboardingCompletion(context)
+                    navController.navigate(BottomBarScreen.Home.route) {
+                        popUpTo("onboarding_flow") { inclusive = true }
+                    }
+                },
+                onSkip = {
+                    // Save onboarding completion and navigate to home
+                    saveOnboardingCompletion(context)
+                    navController.navigate(BottomBarScreen.Home.route) {
+                        popUpTo("onboarding_flow") { inclusive = true }
+                    }
                 }
-                shouldShowOnboarding.value = false
-            }
+            )
         }
 
+        // Main app screens
         composable(route = BottomBarScreen.Home.route) {
-            GreenCreditApp(navController)
+          EkopayApp(navController)
         }
-
 
         composable(route = BottomBarScreen.History.route) {
             TransactionHistoryScreen()
         }
+
         composable(route = BottomBarScreen.Shopping.route) {
             ShoppingScreen(navController)
         }
+
         composable(route = BottomBarScreen.Trade.route) {
             TradingScreen(navController)
         }
+
         composable("submitEcoBrick") {
             EcoBrickScreen()
         }
+
         composable("learning") {
             LearningScreen()
         }
+
         composable("qrscanner") {
             QRScannerScreen(navController)
         }
+
         composable("success") {
             SuccessScreen(navController)
         }
+
         composable("selectmetro") {
             SelectMetroScreen(navController)
         }
+
         composable("b_metro") {
-            BengaluruMetroUI(navController)  // Pass navController to allow navigation
+            BengaluruMetroUI(navController)
         }
 
         composable("chennai_metro") {
             ChennaiMetroScreen()
         }
+
         composable("delhi_metro") {
             DelhiMetroScreen()
         }
+
         composable("kochi_metro") {
             KochiMetroScreen()
         }
 
-        composable("payment_done"){
+        composable("payment_done") {
             paymentcompletescreen()
         }
 
-        composable("crowwwd_funding"){
+        composable("crowwwd_funding") {
             FundingPreview(navController)
         }
+
         composable(
             route = "finalTrading/{amount}",
             arguments = listOf(navArgument("amount") { type = NavType.StringType })
@@ -118,12 +151,10 @@ fun BottomNavGraph(navController: NavHostController) {
             FinalTradingScreen(navController, amount)
         }
 
-
         composable("productCardFinal") {
             ProductCardfinal()
         }
 
-        // Update Metro Price Screen to accept metroCardNumber and amount as arguments
         composable(
             route = "metro_price/{metroCardNumber}/{amount}",
             arguments = listOf(
@@ -155,5 +186,35 @@ fun BottomNavGraph(navController: NavHostController) {
             val amount = backStackEntry.arguments?.getString("amount") ?: ""
             CrowdFundingPaymentScreen(navController, name, amount)
         }
+
+        // Debug route - only include in debug builds
+        // Remove or comment out in production
+        composable("debug_onboarding") {
+            OnboardingFlow(
+                onComplete = {
+                    navController.navigateUp()
+                },
+                onSkip = {
+                    navController.navigateUp()
+                }
+            )
+        }
+    }
+}
+
+
+
+private fun saveOnboardingCompletion(context: Context) {
+    CoroutineScope(Dispatchers.IO).launch {
+        context.dataStore.edit { preferences ->
+            preferences[ONBOARDING_COMPLETED] = true
+        }
+    }
+}
+
+// Extension function for easy onboarding reset (useful for testing)
+suspend fun resetOnboarding(context: Context) {
+    context.dataStore.edit { preferences ->
+        preferences[ONBOARDING_COMPLETED] = false
     }
 }

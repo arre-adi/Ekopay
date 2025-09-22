@@ -46,10 +46,10 @@ data class MetroData(
 fun SelectMetroScreen(navController: NavController) {
     val metros = remember {
         listOf(
-            MetroData("Bengaluru Metro", R.drawable.bengaluruuuu,"b_metro"),
-            MetroData("Chennai Metro", R.drawable.chennaiiii, "chennai_metro"),
-            MetroData("Delhi Metro", R.drawable.delhiiii,  "delhi_metro"),
-            MetroData("Kochi Metro", R.drawable.kochiii,  "kochi_metro")
+            MetroData("Bengaluru Metro", R.drawable.img_metro_bengaluru,"b_metro"),
+            MetroData("Chennai Metro", R.drawable.img_metro_chennai, "chennai_metro"),
+            MetroData("Delhi Metro", R.drawable.img_metro_delhi,  "delhi_metro"),
+            MetroData("Kochi Metro", R.drawable.img_metro_kochi,  "kochi_metro")
         )
     }
 

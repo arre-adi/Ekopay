@@ -6,7 +6,7 @@ plugins {
 
 android {
     namespace = "com.example.ekopay"
-    compileSdk = 36
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.example.ekopay"
@@ -87,6 +87,14 @@ dependencies {
     implementation(libs.converter.gson)
 
     implementation(libs.coil.compose)
+
+
+        // DataStore for preferences
+        implementation("androidx.datastore:datastore-preferences:1.1.7")
+
+        // Lifecycle scope for coroutines
+        implementation("androidx.lifecycle:lifecycle-runtime-compose:2.9.4")
+
 
 
 }

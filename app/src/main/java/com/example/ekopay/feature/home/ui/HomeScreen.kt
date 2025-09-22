@@ -53,16 +53,12 @@ import com.example.ekopay.ui.theme.White1
 @Composable
 fun GreenCreditAppPreview() {
     val navController = rememberNavController()
-    GreenCreditApp(navController = navController)
+    EkopayApp(navController = navController)
 }
 
 
-
-
-
-
 @Composable
-fun GreenCreditApp(navController: NavController) {
+fun EkopayApp(navController: NavController) {
     LazyColumn(
         modifier = Modifier
             .fillMaxWidth()
@@ -96,20 +92,20 @@ fun QuickActions(navController: NavController) {
         horizontalArrangement = Arrangement.SpaceEvenly
     ) {
         ActionButton(
-            icon = ImageVector.vectorResource(id = R.drawable.scanner),
+            icon = ImageVector.vectorResource(id = R.drawable.ic_scanner),
             text = "Scan QR",
             bgcolor = Black1,
             onClick = {  navController.navigate("qrscanner")}
         )
         ActionButton(
-            icon = ImageVector.vectorResource(id = R.drawable.arrow_down),
+            icon = ImageVector.vectorResource(id = R.drawable.ic_arrow_down),
             text = "Pay\r\nContacts",
             bgcolor = Black1,
             iconSize = 60.dp,
             onClick = {}
         )
         ActionButton(
-            icon = ImageVector.vectorResource(id = R.drawable.empty_wallet),
+            icon = ImageVector.vectorResource(id = R.drawable.ic_empty_wallet),
             text = "Check\r\nBalance",
             bgcolor = Black1,
             onClick = {  }
@@ -147,20 +143,20 @@ fun EarnCreditsSection(navController: NavController) {
 //                onClick = { /*TODO*/}
 //            )
             ActionButton(
-                icon = ImageVector.vectorResource(id = R.drawable.noun_metro_3866657),
+                icon = ImageVector.vectorResource(id = R.drawable.ic_metro),
                 text = "Metro\nRecharge",
                 bgcolor = Green1,
                 onClick = { navController.navigate("selectmetro")}
             )
             ActionButton(
-                icon = ImageVector.vectorResource(id = R.drawable.noun_crowdfunding_850697),
+                icon = ImageVector.vectorResource(id = R.drawable.ic_crowdfunding),
                 text = "Crowd\nFunding",
                 bgcolor = Green1,
                 onClick = {navController.navigate("crowwwd_funding")}
             )
 
             ActionButton(
-                icon = ImageVector.vectorResource(id = R.drawable.bag_2),
+                icon = ImageVector.vectorResource(id = R.drawable.ic_bag),
                 text = "Shopping",
                 bgcolor = Green1,
                 onClick = {  navController.navigate(BottomBarScreen.Shopping.route)}
@@ -196,17 +192,17 @@ fun ShopGreenSection() {
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             ShopItem(
-                image = painterResource(id = R.drawable.img_soap),
+                image = painterResource(id = R.drawable.img_product_soap),
                 name = "Organic Soap",
                 price = "₹50"
             )
             ShopItem(
-                image = painterResource(id = R.drawable.img_candle),
+                image = painterResource(id = R.drawable.img_product_candle),
                 name = "Candles",
                 price = "₹10"
             )
             ShopItem(
-                image = painterResource(id = R.drawable.imgapple),
+                image = painterResource(id = R.drawable.img_product_apple),
                 name = "Organic Apples",
                 price = "₹200"
             )
@@ -246,7 +242,7 @@ fun GreenCreditInfoCard(question: String, navController: NavController) {
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Icon(
-                    ImageVector.vectorResource(id = R.drawable.baseline_question_mark_24),
+                    ImageVector.vectorResource(id = R.drawable.actionicons.baseline_question_mark_24),
                     tint = White1,
                     modifier = Modifier
                         .size(45.dp)

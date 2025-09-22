@@ -51,13 +51,13 @@ fun EcoBrickOptionSection() {
                 onClick = { }
             )
             ActionButton(
-                icon = ImageVector.vectorResource(id = R.drawable.clock),
+                icon = ImageVector.vectorResource(id = R.drawable.ic_clock),
                 text = "History",
                 bgcolor = Green1,
                 onClick = { /*TODO*/}
             )
             ActionButton(
-                icon = ImageVector.vectorResource(id = R.drawable.track),
+                icon = ImageVector.vectorResource(id = R.drawable.ic_track),
                 text = "Track\n Package",
                 bgcolor = Green1,
                 onClick = { /*TODO*/}

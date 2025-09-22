@@ -43,7 +43,7 @@ fun ProductCardfinal() {
         Column {
             // Image Section
             Image(
-                painter = painterResource(id = R.drawable.imgapple), // Placeholder for your image
+                painter = painterResource(id = R.drawable.img_product_apple), // Placeholder for your image
                 contentDescription = "Product Image",
                 modifier = Modifier
                     .fillMaxWidth()

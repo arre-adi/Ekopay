@@ -242,7 +242,7 @@ fun GreenCreditInfoCard(question: String, navController: NavController) {
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Icon(
-                    ImageVector.vectorResource(id = R.drawable.actionicons.baseline_question_mark_24),
+                    ImageVector.vectorResource(id = R.drawable.baseline_question_mark_24),
                     tint = White1,
                     modifier = Modifier
                         .size(45.dp)
